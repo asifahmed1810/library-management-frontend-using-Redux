@@ -1,4 +1,5 @@
 import App from "@/App";
+import AddBookModal from "@/pages/AddBookModal";
 import AllBooks from "@/pages/AllBooks";
 import Home from "@/pages/Home";
 
@@ -16,6 +17,10 @@ const router=createBrowserRouter([
             {
                 path:"/books",
                 element:<AllBooks></AllBooks>
+            },
+            {
+                // path:"/add-book",
+                // element:<AddBookModal></AddBookModal>
             }
         ]
     }

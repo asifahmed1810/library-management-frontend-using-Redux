@@ -6,6 +6,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import AddBookModal from "@/pages/AddBookModal";
 import { Link } from "react-router";
 
 
@@ -29,13 +30,13 @@ function Navbar() {
 
           {/* Books */}
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Books</NavigationMenuTrigger>
-            <NavigationMenuContent className="p-4 grid gap-2 w-48">
+            <NavigationMenuTrigger >Books</NavigationMenuTrigger>
+            <NavigationMenuContent className="p-4 grid bg-white gap-2 w-48">
               <NavigationMenuLink asChild>
                 <Link to="/books">All Books</Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="/books/add">Add New Book</Link>
+                <AddBookModal></AddBookModal>
               </NavigationMenuLink>
             </NavigationMenuContent>
           </NavigationMenuItem>
