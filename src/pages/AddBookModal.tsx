@@ -4,49 +4,89 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useCreateTaskMutation } from "@/redux/api/baseApi";
 import { useForm } from "react-hook-form";
-import { data } from "react-router";
+import Swal from "sweetalert2";
 
-type BookFormValues ={
-    title:string,
-    author:string,
-    genre:"FICTION" | "NON_FICTION" | "SCIENCE" | "HISTORY" | "BIOGRAPHY" | "FANTASY",
-    isbn:string,
-    description?:string,
-    copies:number,
-    available:boolean
-}
-
+type BookFormValues = {
+  title: string;
+  author: string;
+  genre:
+    | "FICTION"
+    | "NON_FICTION"
+    | "SCIENCE"
+    | "HISTORY"
+    | "BIOGRAPHY"
+    | "FANTASY";
+  isbn: string;
+  description?: string;
+  copies: number;
+  available: boolean;
+};
 
 const AddBookModal = () => {
+  const [createTask] = useCreateTaskMutation();
+  const form = useForm<BookFormValues>({
+    defaultValues: {
+      title: "",
+      author: "",
+      genre: "FICTION",
+      isbn: "",
+      description: "",
+      copies: 1,
+      available: true,
+    },
+  });
 
-    const form=useForm<BookFormValues>({
-        defaultValues:{
-            title:"",
-            author:"",
-            genre:"FICTION",
-            isbn:"",
-            description:"",
-            copies:1,
-            available:true
-        }
+  const onSubmit = async (data: BookFormValues) => {
+    try {
+      const response = await createTask(data).unwrap();
+      console.log("Book Created", response);
+
+      Swal.fire({
+        icon: "success",
+        title: "Book Added!",
+        text: "The book has been added successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      form.reset();
+    } catch (error:any) {
+       console.error(" Failed to create book:", error);
+
+    
+    Swal.fire({
+      icon: "error",
+      title: "Failed!",
+      text: error?.data?.message || "Something went wrong. Please try again.",
     });
-
-    const onSubmit = ( data:BookFormValues)=>{
-        console.log(data);
     }
+  };
 
   return (
-     <Dialog>
+    <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">Add Book</Button>
       </DialogTrigger>
@@ -56,8 +96,7 @@ const AddBookModal = () => {
         </DialogHeader>
 
         <Form {...form}>
-          <form  onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Title */}
             <FormField
               control={form.control}
@@ -95,7 +134,10 @@ const AddBookModal = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Genre</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select genre" />
@@ -173,7 +215,10 @@ const AddBookModal = () => {
               render={({ field }) => (
                 <FormItem className="flex items-center space-x-2">
                   <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                   <FormLabel>Available</FormLabel>
                 </FormItem>
