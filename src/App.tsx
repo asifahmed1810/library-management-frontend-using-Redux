@@ -1,3 +1,5 @@
+import { Outlet } from "react-router"
+import Navbar from "./components/layout/Navbar"
 import { Button } from "./components/ui/button"
 
 
@@ -8,9 +10,8 @@ function App() {
   return (
     <>
      
-       <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button className="bg-amber-700">Click me</Button>
-    </div>
+     <Navbar></Navbar>
+     <Outlet></Outlet>
       
     </>
   )

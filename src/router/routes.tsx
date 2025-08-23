@@ -1,10 +1,23 @@
-import Navbar from "@/components/layout/Navbar";
+import App from "@/App";
+import AllBooks from "@/pages/AllBooks";
+import Home from "@/pages/Home";
+
 import { createBrowserRouter } from "react-router";
 
 const router=createBrowserRouter([
     {
         path:"/",
-        element:<Navbar></Navbar>
+        element:<App></App>,
+        children:[
+            {
+                path:"/",
+                element:<Home></Home>
+            },
+            {
+                path:"/books",
+                element:<AllBooks></AllBooks>
+            }
+        ]
     }
 ]);
 
