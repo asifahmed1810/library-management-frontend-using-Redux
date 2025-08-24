@@ -79,21 +79,13 @@ function Navbar() {
                 className="block font-semibold"
                 onClick={() => setIsOpen(false)}
               >
-                Home
+                All Books
               </Link>
             </li>
             <li>
               <p className="font-semibold">Books</p>
               <ul className="ml-4 space-y-2">
-                <li>
-                  <Link
-                    to="/books"
-                    onClick={() => setIsOpen(false)}
-                    className="block"
-                  >
-                    All Books
-                  </Link>
-                </li>
+               
                 <li>
                   <AddBookModal />
                 </li>
