@@ -18,6 +18,27 @@ export const baseApi=createApi({
            }),
            invalidatesTags:["task"]
         }),
+
+        updateTask:builder.mutation({
+            query:({id,...updateData})=>({
+                url:`/${id}`,
+                method:"PATCH",
+                body:updateData,
+            }),
+            invalidatesTags:["task"]
+        }),
+
+        deleteTask:builder.mutation({
+            query:(id)=>({
+                url:`/${id}`,
+                method:'DELETE',
+
+            }),
+            invalidatesTags:['task']
+        }),
+
+
+
         getTask1:builder.query({
             query:()=>"/borrow/borrows",
             providesTags:["task"]
@@ -36,4 +57,4 @@ export const baseApi=createApi({
 }) 
 });
 
-export const {useGetTaskQuery,useCreateTaskMutation,useGetTask1Query,useCreateTask1Mutation}=baseApi;
+export const {useGetTaskQuery,useCreateTaskMutation,useUpdateTaskMutation,useDeleteTaskMutation,useGetTask1Query,useCreateTask1Mutation}=baseApi;

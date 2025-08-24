@@ -1,4 +1,4 @@
-import { useGetTaskQuery} from "@/redux/api/baseApi";
+import { useDeleteTaskMutation, useGetTaskQuery, useUpdateTaskMutation} from "@/redux/api/baseApi";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -31,8 +31,8 @@ type BookFormValues = {
 
 function AllBooks() {
   const { data, isLoading, isError, refetch } = useGetTaskQuery(undefined);
-  // const [deleteBook] = useDeleteTaskMutation();
-  // const [updateBook] = useUpdateTaskMutation();
+  const [deleteBook] = useDeleteTaskMutation();
+  const [updateBook] = useUpdateTaskMutation();
   const [selectedBook, setSelectedBook] = useState<any | null>(null);
 
   // React Hook Form for Edit
@@ -56,7 +56,7 @@ function AllBooks() {
         available: values.copies > 0,
       };
 
-      // await updateBook({ id: selectedBook._id, ...updatedData }).unwrap();
+      await updateBook({ id: selectedBook._id, ...updatedData }).unwrap();
 
       Swal.fire({
         icon: "success",
@@ -89,7 +89,7 @@ function AllBooks() {
 
     if (confirm.isConfirmed) {
       try {
-        // await deleteBook(id).unwrap();
+        await deleteBook(id).unwrap();
         Swal.fire("Deleted!", "The book has been removed.", "success");
         refetch();
       } catch (error: any) {

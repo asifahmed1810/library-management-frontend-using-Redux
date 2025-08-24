@@ -30,7 +30,7 @@ function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link to="/" className="font-semibold">
-                  Home
+                  All Books
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -39,9 +39,6 @@ function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Books</NavigationMenuTrigger>
               <NavigationMenuContent className="p-4 grid bg-white gap-2 w-48">
-                <NavigationMenuLink asChild>
-                  <Link to="/books">All Books</Link>
-                </NavigationMenuLink>
                 <NavigationMenuLink asChild>
                   <AddBookModal />
                 </NavigationMenuLink>
