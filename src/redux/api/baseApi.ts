@@ -20,11 +20,20 @@ export const baseApi=createApi({
         }),
         getTask1:builder.query({
             query:()=>"/borrow/borrows",
+            providesTags:["task"]
 
+        }),
+        createTask1:builder.mutation({
+            query:(taskData)=>({
+                url:"/borrow/create-borrow",
+                method:"POST",
+                body:taskData
+            }),
+            invalidatesTags:["task"]
         })
     
 
 }) 
 });
 
-export const {useGetTaskQuery,useCreateTaskMutation,useGetTask1Query}=baseApi;
+export const {useGetTaskQuery,useCreateTaskMutation,useGetTask1Query,useCreateTask1Mutation}=baseApi;

@@ -10,6 +10,7 @@ import AddBookModal from "@/pages/AddBookModal";
 import { Link } from "react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import BorrowModal from "@/pages/BorrowModal";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,14 +53,12 @@ function Navbar() {
               <NavigationMenuTrigger>Borrow</NavigationMenuTrigger>
               <NavigationMenuContent className="p-4 grid gap-2 w-48">
                 <NavigationMenuLink asChild>
-                  <Link to="/borrow">Borrow Book</Link>
+                   <BorrowModal></BorrowModal>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link to="/borrowed">Borrowed Books</Link>
+                  <Link to="/borrowed">Borrow Summary</Link>
                 </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link to="/summary">Borrow Summary</Link>
-                </NavigationMenuLink>
+                
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
@@ -107,13 +106,7 @@ function Navbar() {
               <p className="font-semibold">Borrow</p>
               <ul className="ml-4 space-y-2">
                 <li>
-                  <Link
-                    to="/borrow"
-                    onClick={() => setIsOpen(false)}
-                    className="block"
-                  >
-                    Borrow Book
-                  </Link>
+                  <BorrowModal></BorrowModal>
                 </li>
                 <li>
                   <Link
@@ -121,18 +114,10 @@ function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className="block"
                   >
-                    Borrowed Books
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/summary"
-                    onClick={() => setIsOpen(false)}
-                    className="block"
-                  >
                     Borrow Summary
                   </Link>
                 </li>
+                
               </ul>
             </li>
           </ul>
