@@ -1,6 +1,7 @@
 import App from "@/App";
 
 import AllBooks from "@/pages/AllBooks";
+import BorrowedBook from "@/pages/BorrowedBook";
 import Home from "@/pages/Home";
 
 import { createBrowserRouter } from "react-router";
@@ -19,8 +20,8 @@ const router=createBrowserRouter([
                 element:<AllBooks></AllBooks>
             },
             {
-                // path:"/add-book",
-                // element:<AddBookModal></AddBookModal>
+                path:"/borrowed",
+                element:<BorrowedBook></BorrowedBook>
             }
         ]
     }
