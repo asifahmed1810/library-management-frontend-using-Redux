@@ -3,16 +3,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi=createApi({
     reducerPath:"baseApi",
-    baseQuery:fetchBaseQuery({baseUrl:"https://library-management-api-nu-nine.vercel.app/api"}),
+    baseQuery:fetchBaseQuery({baseUrl:"https://library-management-api-nu-nine.vercel.app/"}),
     tagTypes:["task"],
     endpoints:(builder)=>({
         getTask:builder.query({
-            query:()=>"/books",
+            query:()=>"api/books",
             providesTags:["task"]
         }),
         createTask:builder.mutation({
            query:(taskData)=>({
-            url:"/create-book",
+            url:"api/books",
             method:"POST",
             body:taskData
            }),
@@ -21,7 +21,7 @@ export const baseApi=createApi({
 
         updateTask:builder.mutation({
             query:({id,...updateData})=>({
-                url:`/${id}`,
+                url:`api/books/${id}`,
                 method:"PATCH",
                 body:updateData,
             }),
@@ -30,7 +30,7 @@ export const baseApi=createApi({
 
         deleteTask:builder.mutation({
             query:(id)=>({
-                url:`/${id}`,
+                url:`api/books/${id}`,
                 method:'DELETE',
 
             }),
@@ -40,13 +40,13 @@ export const baseApi=createApi({
 
 
         getTask1:builder.query({
-            query:()=>"/borrow/borrows",
+            query:()=>"api/borrow",
             providesTags:["task"]
 
         }),
         createTask1:builder.mutation({
             query:(taskData)=>({
-                url:"/borrow/create-borrow",
+                url:"api/borrow",
                 method:"POST",
                 body:taskData
             }),
